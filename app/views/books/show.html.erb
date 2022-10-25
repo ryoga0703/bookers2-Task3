@@ -1,6 +1,6 @@
 <main>
   <p id="notice"></p>
-  <div class="container px-5 px-sm-0">
+  <div class="container">
     <div class="row">
       <div class="col-md-3">
         <h2>User info</h2>
@@ -18,7 +18,7 @@
           </tbody>
         </table>
         <div class="row">
-          <%= link_to user_path(current_user.id), class: 'btn btn-outline-secondary btn-block' do %>
+          <%= link_to edit_user_path(@user.id), class: 'btn btn-outline-secondary btn-block' do %>
             <i class="fa-solid fa-user-gear"></i>
           <% end %>
         </div>
@@ -38,6 +38,23 @@
         <% end %>
       </div>
       <div class="col-md-8 offset-md-1">
+        <h2>Book detail</h2>
+        <table class="table">
+          <tbody>
+              <tr>
+                <td>
+                  <%= link_to user_path(@book.user.id) do %>
+                    <%= image_tag @book.user.get_profile_image(100,100) %><br>
+                    <%= @book.user.name %>
+                  <% end %>
+                </td>
+                <td><%= link_to @book.title, book_path(@book) %></td>
+                <td><%= @book.body %></td>
+                <td><%= link_to "edit", edit_book_path(@book) %></td>
+                <td><%= link_to "Destroy", books_path, method: :delete, "data-confirm" => "Are you sure?" %></td>
+              </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
